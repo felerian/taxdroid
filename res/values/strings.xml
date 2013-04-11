@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Title</string>
+    <string name="app_name">TaxDroid</string>
+    <string name="button_start">Start</string>
+    <string name="button_help">Manual</string>
+    <string name="title_help">TaxDroid - Manual</string>
+    <string name="title_levels">TaxDroid - Level Selection</string>
+    <string name="title_game">TaxDroid</string>
+    <string name="text_level">Level</string>
+    <string name="text_unplayed">Unplayed</string>
+    <string name="text_highscore">Best score:</string>
+    <string name="dialog_title_level_completed">Level Completed</string>
+    <string name="dialog_text_score_improved">You improved your score for this level.</string>
+    <string name="dialog_text_score_not_improved">You could not improve your score for this level.</string>
+    <string name="ok">OK</string>
+    <string name="manual">TaxDroid is an implementation of the classic taxman game.\n\nYou are presented with several piles of money consisting of one coin, two coins, three coins etc. up to a maximum number defined by the level you chose. In each round you have to take one money pile to add it to your wallet. After that the TaxDroid takes all money piles that are integral factors of the money pile you took. You must choose your pile in such a way that the TaxDroid gets at least one pile for himself every round. If there are no more valid ways to take a pile, the TaxDroid gets all the rest.\n\nThe objective of the game is to get more money than the TaxDroid. If you have achieved that, you can try to improve your score by increasing the difference between your money and the money in the TaxDroid\'s wallet.</string>
 </resources>
