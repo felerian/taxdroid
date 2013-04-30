@@ -17,6 +17,7 @@ public class GameActivity extends Activity
         
         level = getIntent().getIntExtra(LevelsActivity.EXTRA_LEVEL, -1);
         
+        setTitle("TaxDroid - Level " + String.valueOf(level));
         Intent intent = new Intent();
         intent.putExtra(LevelsActivity.EXTRA_LEVEL, level);
         intent.putExtra(LevelsActivity.EXTRA_RETURN_SCORE, 42);
