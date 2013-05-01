@@ -35,12 +35,12 @@ public class LevelsActivity extends ListActivity
     private ArrayList<Integer> levels;
     private ArrayList<Integer> scores;
     
-    //~ /** Called when the activity is first created. */
-    //~ @Override
-    //~ public void onCreate(Bundle savedInstanceState)
-    //~ {
-        //~ super.onCreate(savedInstanceState);
-    //~ }
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+    }
     
     @Override
     protected void onResume()

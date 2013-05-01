@@ -4,6 +4,8 @@
     <string name="button_start">Start</string>
     <string name="button_help">Manual</string>
     <string name="button_reset_score">Reset Highscores</string>
+    <string name="button_take_money">Take</string>
+    <string name="button_give_up">Give Up</string>
     <string name="title_help">TaxDroid - Manual</string>
     <string name="title_levels">TaxDroid - Level Selection</string>
     <string name="title_game">TaxDroid</string>
@@ -13,6 +15,8 @@
     <string name="dialog_title_level_completed">Level Completed</string>
     <string name="dialog_title_reset_score">Reset Highscores?</string>
     <string name="dialog_message_reset_score">All game progress will be deleted</string>
+    <string name="dialog_title_game_over">Game Over</string>
+    <string name="dialog_message_game_over">Final Score:\nYou: %1$d\nTaxDroid: %2$d</string>
     <string name="dialog_fmt_score_new">You set a new best score for this level.\nYour score: %1$d</string>
     <string name="dialog_fmt_score_improved">You improved your score for this level.\nYour score: %1$d\nPrevious best score: %2$d</string>
     <string name="dialog_fmt_score_not_improved">You could not improve your score for this level.\nYour score: %1$d\nBest score: %2$d</string>
