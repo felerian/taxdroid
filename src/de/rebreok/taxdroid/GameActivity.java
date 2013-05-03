@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.content.DialogInterface;
 import android.widget.LinearLayout;
+import android.widget.GridView;
 import android.widget.Button;
 import android.view.View;
 import android.graphics.Color;
@@ -14,6 +15,10 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity
 {
+    private final static String SELECTION = "selection";
+    private final static String PLAYER_MONEY = "player_money";
+    private final static String TAXDROID_MONEY = "taxdroid_money";
+    
     private int level;
     private int selection;
     private int player_money;
@@ -44,14 +49,33 @@ public class GameActivity extends Activity
                     public void onClick(View view) {
                         Button b = (Button) view;
                         selection = Integer.parseInt(b.getText().toString());
-                        selectButton();
+                        updateSelection();
                     } 
                 });
             hbox.addView(button);
         }
+        
+        if (savedInstanceState != null) {
+            selection = savedInstanceState.getInt(SELECTION);
+            player_money = savedInstanceState.getInt(PLAYER_MONEY);
+            taxdroid_money = savedInstanceState.getInt(TAXDROID_MONEY);
+        } else {
+            selection = 0;
+            player_money = 0;
+            taxdroid_money = 0;
+        }
+        updateSelection();
     }
     
-    private void selectButton() {
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(SELECTION, selection);
+        savedInstanceState.putInt(PLAYER_MONEY, player_money);
+        savedInstanceState.putInt(TAXDROID_MONEY, taxdroid_money);
+        
+        super.onSaveInstanceState(savedInstanceState);
+    }
+    
+    private void updateSelection() {
         boolean taxdroid_gets_its_share = false;
         for (int i = 1; i < selection; i++) {
             if (selection % i == 0 && buttons.get(i - 1).isEnabled()) {
@@ -61,7 +85,9 @@ public class GameActivity extends Activity
                 buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
             }
         }
-        buttons.get(selection - 1).setTextAppearance(this, R.style.text_good);
+        if (selection > 0) {
+            buttons.get(selection - 1).setTextAppearance(this, R.style.text_good);
+        }
         for (int i = selection + 1; i <= level; i++) {
             buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
         }
