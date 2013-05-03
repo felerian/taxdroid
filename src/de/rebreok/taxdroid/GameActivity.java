@@ -5,9 +5,10 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.content.Intent;
 import android.content.DialogInterface;
-import android.widget.LinearLayout;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.view.View;
 import android.graphics.Color;
 
@@ -40,7 +41,7 @@ public class GameActivity extends Activity
         
         setTitle("TaxDroid - Level " + String.valueOf(level));
         
-        LinearLayout hbox = (LinearLayout) findViewById(R.id.hbox);
+        GridLayout hbox = (GridLayout) findViewById(R.id.hbox);
         for (int i = 0; i < level; i++) {
             Button button = new Button(this);
             buttons.add(button);
@@ -75,12 +76,28 @@ public class GameActivity extends Activity
         super.onSaveInstanceState(savedInstanceState);
     }
     
+    /**
+     * Check for end of game and update the Buttons' colors
+     */
     private void updateSelection() {
-        boolean taxdroid_gets_its_share = false;
+        boolean game_over = false;
+        /**
+         * If no valid choice is possible give the rest to the TaxDroid
+         * and set the game_over flag.
+         */
+        if (isGameOver()) {
+            game_over = true;
+            for (int i = 1; i <= level; i++) {
+                if (buttons.get(i - 1).isEnabled()) {
+                    taxdroid_money += i;
+                }
+            }
+        }
+        
+        /** Update the UI */
         for (int i = 1; i < selection; i++) {
             if (selection % i == 0 && buttons.get(i - 1).isEnabled()) {
                 buttons.get(i - 1).setTextAppearance(this, R.style.text_bad);
-                taxdroid_gets_its_share = true;
             } else {
                 buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
             }
@@ -91,16 +108,38 @@ public class GameActivity extends Activity
         for (int i = selection + 1; i <= level; i++) {
             buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
         }
-        if (taxdroid_gets_its_share) {
+        if (isValidChoice(selection)) {
             findViewById(R.id.button_take_money).setEnabled(true);
         } else {
             findViewById(R.id.button_take_money).setEnabled(false);
+        }
+        TextView player_counter = (TextView) findViewById(R.id.text_player_score);
+        player_counter.setText(String.valueOf(player_money));
+        TextView taxdroid_counter = (TextView) findViewById(R.id.text_taxdroid_score);
+        taxdroid_counter.setText(String.valueOf(taxdroid_money));
+        
+        /** If game_over, show a dialog and finish. */
+        if (game_over) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.dialog_title_game_over);
+            builder.setMessage(String.format(getResources().getString(R.string.dialog_message_game_over), player_money, taxdroid_money));
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent();
+                        intent.putExtra(LevelsActivity.EXTRA_LEVEL, level);
+                        intent.putExtra(LevelsActivity.EXTRA_RETURN_SCORE, player_money - taxdroid_money);
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
+                    }
+                });
+            builder.setCancelable(false);
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
     
     public void takeMoney(View view) {
         for (int i = 1; i < selection; i++) {
-            buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
             if (selection % i == 0) {
                 buttons.get(i - 1).setEnabled(false);
                 taxdroid_money += i;
@@ -108,31 +147,25 @@ public class GameActivity extends Activity
         }
         buttons.get(selection - 1).setEnabled(false);
         player_money += selection;
-        for (int i = selection; i <= level; i++) {
-            buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
-        }
-        findViewById(R.id.button_take_money).setEnabled(false);
+        selection = 0;
+        updateSelection();
     }
     
-    public void giveUp(View view) {
-        for (int i = 1; i <= level; i++) {
-            if (buttons.get(i - 1).isEnabled()) {
-                taxdroid_money += i;
+    private boolean isValidChoice(int selection) {
+        for (int i = 1; i < selection; i++) {
+            if (selection % i == 0 && buttons.get(i - 1).isEnabled()) {
+                return true;
             }
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.dialog_title_game_over);
-        builder.setMessage(String.format(getResources().getString(R.string.dialog_message_game_over), player_money, taxdroid_money));
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    Intent intent = new Intent();
-                    intent.putExtra(LevelsActivity.EXTRA_LEVEL, level);
-                    intent.putExtra(LevelsActivity.EXTRA_RETURN_SCORE, player_money - taxdroid_money);
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
-                }
-            });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        return false;
+    }
+    
+    private boolean isGameOver() {
+        for (int i = 1; i <= level; i++) {
+            if (isValidChoice(i)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
