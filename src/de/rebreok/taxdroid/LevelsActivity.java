@@ -56,10 +56,10 @@ public class LevelsActivity extends ListActivity
             String level_score_key = String.format(PREF_LEVEL_SCORE_FMT, level);
             
             HashMap<String, String> map = new HashMap<String, String>();
-            map.put(ITEM_TITLE, getResources().getText(R.string.text_level) + " " + String.valueOf(level));
+            map.put(ITEM_TITLE, getResources().getString(R.string.text_level, level));
             if (preferences.contains(level_score_key))
             {
-                map.put(ITEM_DESCRIPTION, getResources().getText(R.string.text_highscore) + " " + String.valueOf(preferences.getInt(level_score_key, DEF_INT)));
+                map.put(ITEM_DESCRIPTION, getResources().getString(R.string.text_highscore, preferences.getInt(level_score_key, DEF_INT)));
             } else {
                 map.put(ITEM_DESCRIPTION, "" + getResources().getText(R.string.text_unplayed));
             }

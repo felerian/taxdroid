@@ -41,9 +41,9 @@ public class GameActivity extends Activity
         
         level = getIntent().getIntExtra(LevelsActivity.EXTRA_LEVEL, -1);
         
-        setTitle("TaxDroid - Level " + String.valueOf(level));
+        setTitle(getResources().getString(R.string.title_game, level));
         
-        GridLayout hbox = (GridLayout) findViewById(R.id.hbox);
+        GridLayout grid = (GridLayout) findViewById(R.id.grid);
         for (int i = 0; i < level; i++) {
             Button button = new Button(this);
             buttons.add(button);
@@ -55,7 +55,7 @@ public class GameActivity extends Activity
                         updateSelection();
                     }
                 });
-            hbox.addView(button);
+            grid.addView(button);
         }
         
         if (savedInstanceState != null) {
@@ -123,9 +123,9 @@ public class GameActivity extends Activity
             findViewById(R.id.button_take_money).setEnabled(false);
         }
         TextView player_counter = (TextView) findViewById(R.id.text_player_score);
-        player_counter.setText(String.valueOf(sum(player_money)));
+        player_counter.setText(getResources().getString(R.string.fmt_player_score, sum(player_money)));
         TextView taxdroid_counter = (TextView) findViewById(R.id.text_taxdroid_score);
-        taxdroid_counter.setText(String.valueOf(sum(taxdroid_money)));
+        taxdroid_counter.setText(getResources().getString(R.string.fmt_taxdroid_score, sum(taxdroid_money)));
         
         /** If game_over, show a dialog and finish. */
         if (game_over) {
