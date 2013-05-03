@@ -22,8 +22,8 @@ public class GameActivity extends Activity
     
     private int level;
     private int selection;
-    private int player_money;
-    private int taxdroid_money;
+    private ArrayList<Integer> player_money;
+    private ArrayList<Integer> taxdroid_money;
     private ArrayList<Button> buttons;
     
     /** Called when the activity is first created. */
@@ -36,6 +36,8 @@ public class GameActivity extends Activity
         findViewById(R.id.button_take_money).setEnabled(false);
         
         buttons = new ArrayList<Button>();
+        player_money = new ArrayList<Integer>();
+        taxdroid_money = new ArrayList<Integer>();
         
         level = getIntent().getIntExtra(LevelsActivity.EXTRA_LEVEL, -1);
         
@@ -51,27 +53,27 @@ public class GameActivity extends Activity
                         Button b = (Button) view;
                         selection = Integer.parseInt(b.getText().toString());
                         updateSelection();
-                    } 
+                    }
                 });
             hbox.addView(button);
         }
         
         if (savedInstanceState != null) {
             selection = savedInstanceState.getInt(SELECTION);
-            player_money = savedInstanceState.getInt(PLAYER_MONEY);
-            taxdroid_money = savedInstanceState.getInt(TAXDROID_MONEY);
+            player_money = savedInstanceState.getIntegerArrayList(PLAYER_MONEY);
+            taxdroid_money = savedInstanceState.getIntegerArrayList(TAXDROID_MONEY);
         } else {
             selection = 0;
-            player_money = 0;
-            taxdroid_money = 0;
+            player_money = new ArrayList<Integer>();
+            taxdroid_money = new ArrayList<Integer>();
         }
         updateSelection();
     }
     
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt(SELECTION, selection);
-        savedInstanceState.putInt(PLAYER_MONEY, player_money);
-        savedInstanceState.putInt(TAXDROID_MONEY, taxdroid_money);
+        savedInstanceState.putIntegerArrayList(PLAYER_MONEY, player_money);
+        savedInstanceState.putIntegerArrayList(TAXDROID_MONEY, taxdroid_money);
         
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -89,7 +91,7 @@ public class GameActivity extends Activity
             game_over = true;
             for (int i = 1; i <= level; i++) {
                 if (buttons.get(i - 1).isEnabled()) {
-                    taxdroid_money += i;
+                    taxdroid_money.add(i);
                 }
             }
         }
@@ -114,20 +116,20 @@ public class GameActivity extends Activity
             findViewById(R.id.button_take_money).setEnabled(false);
         }
         TextView player_counter = (TextView) findViewById(R.id.text_player_score);
-        player_counter.setText(String.valueOf(player_money));
+        player_counter.setText(String.valueOf(sum(player_money)));
         TextView taxdroid_counter = (TextView) findViewById(R.id.text_taxdroid_score);
-        taxdroid_counter.setText(String.valueOf(taxdroid_money));
+        taxdroid_counter.setText(String.valueOf(sum(taxdroid_money)));
         
         /** If game_over, show a dialog and finish. */
         if (game_over) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.dialog_title_game_over);
-            builder.setMessage(String.format(getResources().getString(R.string.dialog_message_game_over), player_money, taxdroid_money));
+            builder.setMessage(String.format(getResources().getString(R.string.dialog_message_game_over), sum(player_money), sum(taxdroid_money)));
             builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent();
                         intent.putExtra(LevelsActivity.EXTRA_LEVEL, level);
-                        intent.putExtra(LevelsActivity.EXTRA_RETURN_SCORE, player_money - taxdroid_money);
+                        intent.putExtra(LevelsActivity.EXTRA_RETURN_SCORE, sum(player_money) - sum(taxdroid_money));
                         setResult(Activity.RESULT_OK, intent);
                         finish();
                     }
@@ -142,11 +144,11 @@ public class GameActivity extends Activity
         for (int i = 1; i < selection; i++) {
             if (selection % i == 0) {
                 buttons.get(i - 1).setEnabled(false);
-                taxdroid_money += i;
+                taxdroid_money.add(i);
             }
         }
         buttons.get(selection - 1).setEnabled(false);
-        player_money += selection;
+        player_money.add(selection);
         selection = 0;
         updateSelection();
     }
@@ -167,5 +169,13 @@ public class GameActivity extends Activity
             }
         }
         return true;
+    }
+    
+    private int sum(ArrayList<Integer> list) {
+        int result = 0;
+        for (Integer i:list) {
+            result += i;
+        }
+        return result;
     }
 }
