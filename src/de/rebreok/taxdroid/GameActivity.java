@@ -97,18 +97,25 @@ public class GameActivity extends Activity
         }
         
         /** Update the UI */
-        for (int i = 1; i < selection; i++) {
-            if (selection % i == 0 && buttons.get(i - 1).isEnabled()) {
-                buttons.get(i - 1).setTextAppearance(this, R.style.text_bad);
+        Button button;
+        for (int i = 1; i <= level; i++) {
+            button = buttons.get(i - 1);
+            if (player_money.contains(i)) {
+                button.setTextAppearance(this, R.style.text_good);
+                button.setEnabled(false);
+            } else if (taxdroid_money.contains(i)) {
+                button.setTextAppearance(this, R.style.text_bad);
+                button.setEnabled(false);
+            } else if (i == selection) {
+                button.setTextAppearance(this, R.style.text_good_bold);
+                button.setEnabled(true);
+            } else if (selection > 0 && selection % i == 0) {
+                button.setTextAppearance(this, R.style.text_bad_bold);
+                button.setEnabled(true);
             } else {
-                buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
+                button.setTextAppearance(this, R.style.text_default);
+                button.setEnabled(true);
             }
-        }
-        if (selection > 0) {
-            buttons.get(selection - 1).setTextAppearance(this, R.style.text_good);
-        }
-        for (int i = selection + 1; i <= level; i++) {
-            buttons.get(i - 1).setTextAppearance(this, R.style.text_default);
         }
         if (isValidChoice(selection)) {
             findViewById(R.id.button_take_money).setEnabled(true);
@@ -142,7 +149,7 @@ public class GameActivity extends Activity
     
     public void takeMoney(View view) {
         for (int i = 1; i < selection; i++) {
-            if (selection % i == 0) {
+            if (selection % i == 0 && !player_money.contains(i) && !taxdroid_money.contains(i)) {
                 buttons.get(i - 1).setEnabled(false);
                 taxdroid_money.add(i);
             }
