@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.content.Intent;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
@@ -14,17 +15,19 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 
+
 public class GameActivity extends Activity
 {
     private final static String SELECTION = "selection";
     private final static String PLAYER_MONEY = "player_money";
     private final static String TAXDROID_MONEY = "taxdroid_money";
     
-    private int level;
-    private int selection;
-    private ArrayList<Integer> player_money;
-    private ArrayList<Integer> taxdroid_money;
-    private ArrayList<Button> buttons;
+    public int level;
+    public int selection;
+    public ArrayList<Integer> player_money;
+    public ArrayList<Integer> taxdroid_money;
+    
+    private ButtonAdapter adapter;
     
     /** Called when the activity is first created. */
     @Override
@@ -35,7 +38,6 @@ public class GameActivity extends Activity
         
         findViewById(R.id.button_take_money).setEnabled(false);
         
-        buttons = new ArrayList<Button>();
         player_money = new ArrayList<Integer>();
         taxdroid_money = new ArrayList<Integer>();
         
@@ -43,20 +45,11 @@ public class GameActivity extends Activity
         
         setTitle(getResources().getString(R.string.title_game, level));
         
-        GridLayout grid = (GridLayout) findViewById(R.id.grid);
-        for (int i = 0; i < level; i++) {
-            Button button = new Button(this);
-            buttons.add(button);
-            button.setText(String.valueOf(i + 1));
-            button.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                        Button b = (Button) view;
-                        selection = Integer.parseInt(b.getText().toString());
-                        updateSelection();
-                    }
-                });
-            grid.addView(button);
-        }
+        GridView grid = (GridView) findViewById(R.id.grid);
+        adapter = new ButtonAdapter(this);
+        grid.setAdapter(adapter);
+        
+        
         
         if (savedInstanceState != null) {
             selection = savedInstanceState.getInt(SELECTION);
@@ -67,7 +60,12 @@ public class GameActivity extends Activity
             player_money = new ArrayList<Integer>();
             taxdroid_money = new ArrayList<Integer>();
         }
-        updateSelection();
+        updateUI();
+    }
+    
+    public void selectButton(int nr) {
+        selection = nr;
+        updateUI();
     }
     
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -81,7 +79,7 @@ public class GameActivity extends Activity
     /**
      * Check for end of game and update the Buttons' colors
      */
-    private void updateSelection() {
+    private void updateUI() {
         boolean game_over = false;
         /**
          * If no valid choice is possible give the rest to the TaxDroid
@@ -90,7 +88,7 @@ public class GameActivity extends Activity
         if (isGameOver()) {
             game_over = true;
             for (int i = 1; i <= level; i++) {
-                if (buttons.get(i - 1).isEnabled()) {
+                if (!player_money.contains(i) && !taxdroid_money.contains(i)) {
                     taxdroid_money.add(i);
                 }
             }
@@ -99,7 +97,7 @@ public class GameActivity extends Activity
         /** Update the UI */
         Button button;
         for (int i = 1; i <= level; i++) {
-            button = buttons.get(i - 1);
+            button = (Button) adapter.getItem(i - 1);
             if (player_money.contains(i)) {
                 button.setTextAppearance(this, R.style.text_good);
                 button.setEnabled(false);
@@ -150,19 +148,20 @@ public class GameActivity extends Activity
     public void takeMoney(View view) {
         for (int i = 1; i < selection; i++) {
             if (selection % i == 0 && !player_money.contains(i) && !taxdroid_money.contains(i)) {
-                buttons.get(i - 1).setEnabled(false);
+                //~ Button button = (Button) adapter.get(i - 1);
+                //~ button.setEnabled(false);
                 taxdroid_money.add(i);
             }
         }
-        buttons.get(selection - 1).setEnabled(false);
+        //~ buttons.get(selection - 1).setEnabled(false);
         player_money.add(selection);
         selection = 0;
-        updateSelection();
+        updateUI();
     }
     
     private boolean isValidChoice(int selection) {
         for (int i = 1; i < selection; i++) {
-            if (selection % i == 0 && buttons.get(i - 1).isEnabled()) {
+            if (selection % i == 0 && !player_money.contains(i) && !taxdroid_money.contains(i)) {
                 return true;
             }
         }

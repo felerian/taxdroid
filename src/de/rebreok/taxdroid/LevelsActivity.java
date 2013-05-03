@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class LevelsActivity extends ListActivity
 {
     private final static String ITEM_TITLE = "item_title";
