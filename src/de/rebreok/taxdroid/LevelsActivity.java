@@ -28,7 +28,7 @@ public class LevelsActivity extends ListActivity
     public final static String EXTRA_LEVEL = "level";
     private final static String PREF_LEVEL_SCORE_FMT = "level_%1$d_score";
     private final static int MIN_LEVEL = 1;
-    private final static int MAX_LEVEL = 25;
+    private final static int MAX_LEVEL = 50;
     public final static int RETURN_GAME_RESULT_REQUEST = 23;
     public final static String EXTRA_RETURN_SCORE = "return_score";
     private final static int DEF_INT = 232323;

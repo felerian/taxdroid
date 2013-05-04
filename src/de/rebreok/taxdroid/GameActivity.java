@@ -22,10 +22,10 @@ public class GameActivity extends Activity
     private final static String PLAYER_MONEY = "player_money";
     private final static String TAXDROID_MONEY = "taxdroid_money";
     
-    public int level;
-    public int selection;
-    public ArrayList<Integer> player_money;
-    public ArrayList<Integer> taxdroid_money;
+    private int level;
+    private int selection;
+    private ArrayList<Integer> player_money;
+    private ArrayList<Integer> taxdroid_money;
     
     private ButtonAdapter adapter;
     
@@ -37,19 +37,14 @@ public class GameActivity extends Activity
         setContentView(R.layout.game);
         
         findViewById(R.id.button_take_money).setEnabled(false);
-        
         player_money = new ArrayList<Integer>();
         taxdroid_money = new ArrayList<Integer>();
-        
         level = getIntent().getIntExtra(LevelsActivity.EXTRA_LEVEL, -1);
-        
         setTitle(getResources().getString(R.string.title_game, level));
         
         GridView grid = (GridView) findViewById(R.id.grid);
         adapter = new ButtonAdapter(this);
         grid.setAdapter(adapter);
-        
-        
         
         if (savedInstanceState != null) {
             selection = savedInstanceState.getInt(SELECTION);
@@ -61,6 +56,10 @@ public class GameActivity extends Activity
             taxdroid_money = new ArrayList<Integer>();
         }
         updateUI();
+    }
+    
+    public int getLevel() {
+        return level;
     }
     
     public void selectButton(int nr) {
@@ -148,15 +147,11 @@ public class GameActivity extends Activity
     public void takeMoney(View view) {
         for (int i = 1; i < selection; i++) {
             if (selection % i == 0 && !player_money.contains(i) && !taxdroid_money.contains(i)) {
-                //~ Button button = (Button) adapter.get(i - 1);
-                //~ button.setEnabled(false);
                 taxdroid_money.add(i);
             }
         }
-        //~ buttons.get(selection - 1).setEnabled(false);
         player_money.add(selection);
-        selection = 0;
-        updateUI();
+        selectButton(0);
     }
     
     private boolean isValidChoice(int selection) {

@@ -15,7 +15,7 @@ public class ButtonAdapter extends BaseAdapter {
     public ButtonAdapter(GameActivity ga) {
         parent = ga;
         buttons = new ArrayList<Button>();
-        for (int i = 0; i < parent.level; i++) {
+        for (int i = 0; i < getCount(); i++) {
             Button button = new Button(parent);
             buttons.add(button);
             button.setText(String.valueOf(i + 1));
@@ -30,7 +30,7 @@ public class ButtonAdapter extends BaseAdapter {
     }
     
     public int getCount() {
-        return parent.level;
+        return parent.getLevel();
     }
     
     public Object getItem(int position) {
