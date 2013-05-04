@@ -1,6 +1,7 @@
 package de.rebreok.taxdroid;
 
 import android.app.Activity;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
@@ -14,6 +15,9 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
     }
     
     public void displayLevels(View view)
