@@ -13,10 +13,10 @@
         >
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             >
             <TextView
                 android:layout_width="fill_parent"
@@ -27,16 +27,28 @@
                 android:id="@+id/text_player_score"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:text="0"
                 />
         </LinearLayout>
+        <Button
+            android:id="@+id/button_take_money"
+            android:onClick="takeMoney"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/button_take_money"
+            android:padding="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_gravity="bottom"
+            />
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
             >
             <TextView
                 android:layout_width="fill_parent"
@@ -49,29 +61,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:textSize="30sp"
+                android:textSize="40sp"
                 android:text="0"
                 />
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/button_take_money"
-        android:onClick="takeMoney"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_take_money"
-        android:padding="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        />
     <GridView
         android:id="@+id/grid"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_margin="10dp"
-        android:numColumns="5"
-        android:verticalSpacing="5dp"
-        android:horizontalSpacing="5dp"
+        android:layout_margin="20dp"
+        android:numColumns="10"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
         />
 </LinearLayout>
