@@ -15,10 +15,10 @@
     <string name="label_taxdroid_score">Steuereintreiber</string>
     <string name="fmt_player_score">%1$d.00€</string>
     <string name="fmt_taxdroid_score">%1$d.00€</string>
-    <string name="dialog_title_level_completed">Level beendet</string>
+    <string name="dialog_title_level_completed">Runde beendet</string>
     <string name="dialog_title_reset_score">Punkte zurücksetzen?</string>
     <string name="dialog_message_reset_score">Alle erspielten Punktzahlen werden gelöscht</string>
-    <string name="dialog_title_game_over">Runde Beendet</string>
+    <string name="dialog_title_game_over">Runde beendet</string>
     <string name="dialog_message_game_over">Es gibt keine gültigen Züge mehr. Der Steuereintreiber bekommt den Rest.\n\nIhr Konto: $%1$d.00\nSteuereintreiber: $%2$d.00</string>
     <string name="dialog_fmt_score_new">Sie haben eine neue Höchstpunktzahl für diesen Level aufgestellt.\n\nIhre Punktzahl: %1$d</string>
     <string name="dialog_fmt_score_improved">Sie haben die Höchstpunktzahl für diesen Level überboten.\n\nIhre Punktzahl: %1$d\nBisherige Höchstpunktzahl: %2$d</string>

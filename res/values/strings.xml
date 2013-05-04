@@ -18,7 +18,7 @@
     <string name="dialog_title_level_completed">Level Completed</string>
     <string name="dialog_title_reset_score">Reset Highscores?</string>
     <string name="dialog_message_reset_score">All game progress will be deleted</string>
-    <string name="dialog_title_game_over">Game Over</string>
+    <string name="dialog_title_game_over">Level Completed</string>
     <string name="dialog_message_game_over">There are no more valid choices left. The taxman gets the rest.\n\nYour Wallet: $%1$d.00\nTaxman\'s Wallet: $%2$d.00</string>
     <string name="dialog_fmt_score_new">You set a new best score for this level.\n\nYour score: %1$d</string>
     <string name="dialog_fmt_score_improved">You improved your score for this level.\n\nYour score: %1$d\nPrevious best score: %2$d</string>
