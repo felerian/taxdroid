@@ -11,19 +11,19 @@
     <string name="text_level">Level %1$d</string>
     <string name="text_unplayed">noch nicht gespielt</string>
     <string name="text_highscore">Bestes Ergebnis: %1$d</string>
-    <string name="label_player_score">Ihr Geld</string>
-    <string name="label_taxdroid_score">Geld des TaxDroids</string>
+    <string name="label_player_score">Ihr Konto</string>
+    <string name="label_taxdroid_score">Steuereintreiber</string>
     <string name="fmt_player_score">%1$d.00€</string>
     <string name="fmt_taxdroid_score">%1$d.00€</string>
     <string name="dialog_title_level_completed">Level beendet</string>
     <string name="dialog_title_reset_score">Punkte zurücksetzen?</string>
     <string name="dialog_message_reset_score">Alle erspielten Punktzahlen werden gelöscht</string>
     <string name="dialog_title_game_over">Runde Beendet</string>
-    <string name="dialog_message_game_over">Es gibt keine gültigen Züge mehr. Der TaxDroid bekommt den Rest.\n\nIhr Geld: $%1$d.00\nGeld des TaxDroids: $%2$d.00</string>
+    <string name="dialog_message_game_over">Es gibt keine gültigen Züge mehr. Der Steuereintreiber bekommt den Rest.\n\nIhr Konto: $%1$d.00\nSteuereintreiber: $%2$d.00</string>
     <string name="dialog_fmt_score_new">Sie haben eine neue Höchstpunktzahl für diesen Level aufgestellt.\n\nIhre Punktzahl: %1$d</string>
     <string name="dialog_fmt_score_improved">Sie haben die Höchstpunktzahl für diesen Level überboten.\n\nIhre Punktzahl: %1$d\nBisherige Höchstpunktzahl: %2$d</string>
     <string name="dialog_fmt_score_not_improved">Sie konnten die Höchstpunktzahl für diesen Level leider nicht überbieten.\n\nIhre Punktzahl: %1$d\nBisherige Höchstpunktzahl: %2$d</string>
     <string name="ok">OK</string>
     <string name="cancel">Abbrechen</string>
-    <string name="manual">TaxDroid ist eine Implementierung des klassischen TaxMan-Spiels.\n\nYou are presented with several piles of money consisting of one coin, two coins, three coins etc. up to a maximum number defined by the level you chose. In each round you have to take one money pile to add it to your wallet. After that the TaxDroid takes all money piles that are integral factors of the money pile you took. You must choose your pile in such a way that the TaxDroid gets at least one pile for himself every round. If there are no more valid ways to take a pile, the TaxDroid gets all the rest.\n\nThe objective of the game is to get more money than the TaxDroid. If you have achieved that, you can try to improve your score by increasing the difference between your money and the money in the TaxDroid\'s wallet.</string>
+    <string name="manual">TaxDroid ist eine Implementierung des klassischen Taxman-Spiels.\n\nIn diesem Spiel werden Ihnen Geldbeträge im Wert von 1€, 2€, 3€, etc. bis zu einem vom Level abhängigen Maximalwert angeboten. In jedem Zug wählen Sie einen Betrag, der Ihrem Konto gutgeschrieben wird. Anschließend erhält der Steuereintreiber sämtliche ganzzahligen Teiler dieses Betrages. Der Steuereintreiber darf dabei niemals leer ausgehen. Sobald keine erlaubten Züge mehr möglich sind, endet das Spiel und der Steuereintreiber erhält sämtliche verbleibenden Geldbeträge.\n\nZiel des Spiels ist es, mehr Geld einzunehmen als der Steuereintreiber. Wenn Sie das geschafft haben, versuchen Sie den Differenzbetrag zwischen Ihrem Konto und dem des Steuereintreibers zu maximieren.</string>
 </resources>
