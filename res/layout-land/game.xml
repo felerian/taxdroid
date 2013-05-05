@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
                 android:text="0"
+                android:fontFamily="serif"
                 />
         </LinearLayout>
         <Button
@@ -63,6 +64,7 @@
                 android:gravity="right"
                 android:textSize="30sp"
                 android:text="0"
+                android:fontFamily="serif"
                 />
         </LinearLayout>
     </LinearLayout>
