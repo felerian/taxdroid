@@ -18,7 +18,6 @@
  */
 package de.rebreok.taxdroid;
 
-//~ import android.graphics.Color;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.view.View;
@@ -38,8 +37,6 @@ public class ButtonAdapter extends BaseAdapter {
             Button button = new Button(parent);
             buttons.add(button);
             button.setText(String.valueOf(i + 1));
-            button.setPadding(20, 20, 20, 20);
-            //~ button.setShadowLayer(4, 0, 0, Color.BLACK);
             button.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         Button b = (Button) view;

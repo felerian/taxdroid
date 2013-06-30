@@ -4,47 +4,30 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<ImageView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/logo"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:layout_marginTop="50dp"
-    android:layout_marginBottom="50dp"
-    android:layout_weight="1"
-    />
-<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:textSize="40sp"
-    android:text="@string/app_name"
-    android:fontFamily="serif"
-    />
-<Button
-    android:onClick="displayLevels"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/button_start"
-    android:layout_gravity="center"
-    android:padding="20dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:layout_marginTop="50dp"
-    android:layout_marginBottom="15dp"
-    />
-<Button
-    android:onClick="displayHelp"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/button_help"
-    android:layout_gravity="center"
-    android:padding="20dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="50dp"
-    />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/logo"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+        <Button
+            style="@style/menu_button"
+            android:onClick="displayLevels"
+            android:text="@string/button_start"
+            />
+        <Button
+            style="@style/menu_button"
+            android:onClick="displayHelp"
+            android:text="@string/button_help"
+            />
+    </LinearLayout>
 </LinearLayout>
-
